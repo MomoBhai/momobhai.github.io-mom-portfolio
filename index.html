@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nandita Shenoy - Shaping Young Minds</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            background: #0f0f1e;
+            color: #fff;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            overflow: hidden;
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .shape:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            background: white;
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .shape:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            background: white;
+            border-radius: 50%;
+            bottom: 10%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-30px) rotate(5deg); }
+            50% { transform: translateY(-60px) rotate(-5deg); }
+            75% { transform: translateY(-30px) rotate(3deg); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            padding: 20px;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .profile-hero {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 5px solid rgba(255,255,255,0.3);
+            margin: 0 auto 30px;
+            object-fit: cover;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            animation: profileFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes profileFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero h1 {
+            font-size: 4em;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 2px 2px 20px rgba(0,0,0,0.3);
+        }
+
+        .hero-tagline {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-20px); }
+            60% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        .scroll-indicator span {
+            display: block;
+            width: 30px;
+            height: 50px;
+            border: 2px solid rgba(255,255,255,0.8);
+            border-radius: 25px;
+            position: relative;
+        }
+
+        .scroll-indicator span::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            width: 6px;
+            height: 6px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            animation: scroll 2s infinite;
+        }
+
+        @keyframes scroll {
+            0% { top: 10px; opacity: 1; }
+            100% { top: 30px; opacity: 0; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 15, 30, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 20px 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.5);
+            transform: translateY(-100%);
+            transition: transform 0.3s;
+        }
+
+        nav.visible {
+            transform: translateY(0);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 40px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #f093fb;
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 3em;
+            text-align: center;
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Journey Timeline */
+        #journey {
+            background: linear-gradient(180deg, #0f0f1e 0%, #1a1a2e 100%);
+        }
+
+        .timeline {
+            position: relative;
+            padding: 50px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #667eea, #764ba2, #f093fb);
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 80px;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            width: 45%;
+            background: rgba(255,255,255,0.05);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .timeline-content:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: #f093fb;
+            border-radius: 50%;
+            border: 4px solid #0f0f1e;
+            z-index: 2;
+        }
+
+        .year {
+            font-size: 1.2em;
+            color: #f093fb;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .timeline-content h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .timeline-content h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        /* Impact Section */
+        #impact {
+            background: #1a1a2e;
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .impact-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .impact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(240, 147, 251, 0.2);
+        }
+
+        .impact-number {
+            font-size: 4em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .impact-label {
+            font-size: 1.2em;
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* Philosophy Section */
+        #philosophy {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            text-align: center;
+        }
+
+        .philosophy-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.3em;
+            line-height: 1.8;
+            font-style: italic;
+            padding: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Expertise Section */
+        #expertise {
+            background: #0f0f1e;
+        }
+
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .expertise-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.15), rgba(240, 147, 251, 0.15));
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 4px solid #f093fb;
+            transition: all 0.3s;
+        }
+
+        .expertise-card:hover {
+            border-left-width: 8px;
+            padding-left: 34px;
+        }
+
+        .expertise-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .expertise-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #f093fb;
+        }
+
+        .expertise-card p {
+            line-height: 1.6;
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* Contact Section */
+        #contact {
+            background: #1a1a2e;
+            text-align: center;
+        }
+
+        .contact-methods {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+
+        .contact-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(240, 147, 251, 0.2));
+            padding: 40px;
+            border-radius: 20px;
+            min-width: 250px;
+            transition: transform 0.3s;
+        }
+
+        .contact-card:hover {
+            transform: scale(1.05);
+        }
+
+        .contact-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .contact-card h3 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            color: #f093fb;
+        }
+
+        .contact-card a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1em;
+        }
+
+        footer {
+            background: #0f0f1e;
+            text-align: center;
+            padding: 30px;
+            color: rgba(255,255,255,0.6);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5em;
+            }
+
+            nav ul {
+                gap: 20px;
+                font-size: 0.9em;
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                flex-direction: column !important;
+                padding-left: 60px;
+            }
+
+            .timeline-content {
+                width: 100%;
+            }
+
+            .timeline-dot {
+                left: 30px;
+            }
+
+            .section-title {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+        <div class="hero-content">
+            <img src="profile.jpg" alt="Nandita Shenoy" class="profile-hero">
+            <h1>Nandita Shenoy</h1>
+            <p class="hero-tagline">Shaping Young Minds, Building Bright Futures</p>
+        </div>
+        <div class="scroll-indicator">
+            <span></span>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <ul>
+            <li><a href="#journey">Journey</a></li>
+            <li><a href="#impact">Impact</a></li>
+            <li><a href="#philosophy">Philosophy</a></li>
+            <li><a href="#expertise">Expertise</a></li>
+            <li><a href="#contact">Connect</a></li>
+        </ul>
+    </nav>
+
+    <!-- Journey Section -->
+    <section id="journey">
+        <h2 class="section-title">My Educational Journey</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="year">2023 - Present</div>
+                    <h3>Head of Section</h3>
+                    <h4>Wise Indian Private School, UAQ</h4>
+                    <p>Leading KG through Grade 2, overseeing curriculum development, teacher mentorship, and creating a nurturing environment for over 200 young learners. Pioneering innovative teaching methodologies and parent engagement programs.</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="year">2017 - 2023</div>
+                    <h3>Academic Coordinator</h3>
+                    <h4>New Delhi Private School, Sharjah</h4>
+                    <p>Developed comprehensive curriculum frameworks, trained educators in modern pedagogy, and established performance tracking systems that improved student outcomes by implementing data-driven instruction methods.</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="year">2015 - 2017</div>
+                    <h3>Performing Arts & Life Skills Teacher</h3>
+                    <h4>Ekya Schools, Bangalore</h4>
+                    <p>Integrated creative arts into academic learning, designed innovative lesson plans that fostered creativity, and organized cultural events that celebrated diversity and student expression.</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="year">2011 - 2015</div>
+                    <h3>KG 1 Teacher</h3>
+                    <h4>Delhi Private School, Sharjah</h4>
+                    <p>Pioneered phonics and literacy programs, created engaging theme-based learning experiences, and built strong parent-teacher partnerships that supported holistic child development.</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="year">2007 - 2011</div>
+                    <h3>Kindergarten Teacher</h3>
+                    <h4>Our Own English High School, Sharjah</h4>
+                    <p>Began my journey in early childhood education, developing foundational skills through play-based learning and creating a warm, nurturing classroom environment where every child felt valued.</p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section id="impact">
+        <h2 class="section-title">Making an Impact</h2>
+        <div class="impact-grid">
+            <div class="impact-card">
+                <div class="impact-number">18+</div>
+                <div class="impact-label">Years of Experience</div>
+            </div>
+            <div class="impact-card">
+                <div class="impact-number">1000+</div>
+                <div class="impact-label">Students Mentored</div>
+            </div>
+            <div class="impact-card">
+                <div class="impact-number">100+</div>
+                <div class="impact-label">Teachers Trained</div>
+            </div>
+            <div class="impact-card">
+                <div class="impact-number">50+</div>
+                <div class="impact-label">Events Organized</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section id="philosophy">
+        <h2 class="section-title">Teaching Philosophy</h2>
+        <div class="philosophy-content">
+            "Every child is a unique learner with boundless potential. My mission is to create an environment where curiosity thrives, creativity flourishes, and every young mind feels empowered to explore, question, and grow. Education is not just about academics—it's about nurturing confident, compassionate, and capable individuals who will shape tomorrow."
+        </div>
+    </section>
+
+    <!-- Expertise Section -->
+    <section id="expertise">
+        <h2 class="section-title">Areas of Expertise</h2>
+        <div class="expertise-grid">
+            <div class="expertise-card">
+                <div class="expertise-icon">🎓</div>
+                <h3>Educational Leadership</h3>
+                <p>Leading academic teams, developing strategic initiatives, and fostering a culture of excellence in early childhood education across diverse school environments.</p>
+            </div>
+            <div class="expertise-card">
+                <div class="expertise-icon">📚</div>
+                <h3>Curriculum Innovation</h3>
+                <p>Designing engaging, standards-aligned curricula that blend CBSE and international frameworks with creative, child-centered teaching approaches.</p>
+            </div>
+            <div class="expertise-card">
+                <div class="expertise-icon">👥</div>
+                <h3>Teacher Development</h3>
+                <p>Mentoring educators through professional development programs, classroom observations, and continuous support to enhance teaching effectiveness.</p>
+            </div>
+            <div class="expertise-card">
+                <div class="expertise-icon">🎭</div>
+                <h3>Creative Arts Integration</h3>
+                <p>Incorporating music, drama, storytelling, and dance into learning experiences that spark imagination and emotional intelligence.</p>
+            </div>
+            <div class="expertise-card">
+                <div class="expertise-icon">💻</div>
+                <h3>Technology Integration</h3>
+                <p>Leveraging digital tools like Google Classroom, Microsoft Teams, and Seesaw to create interactive and engaging learning experiences.</p>
+            </div>
+            <div class="expertise-card">
+                <div class="expertise-icon">🤝</div>
+                <h3>Parent Partnership</h3>
+                <p>Building strong school-home connections through effective communication, workshops, and collaborative approaches to child development.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title">Let's Connect</h2>
+        <p style="font-size: 1.2em; margin-bottom: 20px; opacity: 0.8;">Open to collaboration, speaking engagements, and educational consulting</p>
+        <div class="contact-methods">
+            <div class="contact-card">
+                <div class="contact-icon">📧</div>
+                <h3>Email</h3>
+                <a href="mailto:nandithashenoy@gmail.com">nandithashenoy@gmail.com</a>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon">📱</div>
+                <h3>Phone</h3>
+                <a href="tel:+971568401824">+971 56 8401824</a>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon">📍</div>
+                <h3>Location</h3>
+                <p>Sharjah, UAE</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Nandita Shenoy | Passionate Educator | Lifelong Learner</p>
+    </footer>
+
+    <script>
+        // Navbar scroll behavior
+        let lastScroll = 0;
+        const navbar = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                navbar.classList.add('visible');
+            } else {
+                navbar.classList.remove('visible');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
